@@ -3,39 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT Company Finder</title>
+  <title>IT Company Scraper</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>IT Company Finder</h1>
+      <h2>IT Company Finder</h2>
+      <p class="subtitle">Powered by Web Scraping</p>
     </header>
 
-    <div class="search-box">
-      <input type="text" id="location-input" placeholder="Enter place (e.g., Vastral)">
-      <button id="search-btn">Search</button>
+    <div class="search-section">
+      <div class="input-group">
+        <input type="text" id="location-input" placeholder="Enter location (e.g., Vastral, Gota)">
+      </div>
+      <div class="server-status">
+        <span id="status-indicator" class="status-dot down"></span>
+        <span id="status-text">Backend: Disconnected</span>
+      </div>
+      <button id="search-btn">Search IT Companies</button>
     </div>
 
-    <div id="map"></div>
-
     <div class="results-section">
-      <h3>Nearby IT Companies</h3>
+      <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>Scraping directories... (this may take 10-20s)</p>
+      </div>
+      
+      <div id="error-msg" class="hidden"></div>
+
       <ul id="company-list">
-        <!-- Results will appear here -->
-        <li class="placeholder">Search a location to find companies...</li>
+        <li class="placeholder">
+          <div class="icon-placeholder">🏢</div>
+          <p>Enter a location to scrape real data from Google, JustDial & Sulekha.</p>
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
   <script src="popup.js"></script>
 </body>
 </html>

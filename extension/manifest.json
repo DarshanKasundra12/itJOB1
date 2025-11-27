@@ -1,11 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "IT Company Finder",
-  "version": "1.0",
-  "description": "Find IT companies near any location using free APIs.",
+  "name": "IT Company Finder (Scraper)",
+  "version": "2.0",
+  "description": "Find IT companies using custom backend scraping.",
   "permissions": [
-    "geolocation",
-    "activeTab"
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -19,8 +22,5 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  },
-  "background": {
-    "service_worker": "service-worker.js"
   }
 }
