@@ -137,8 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
   async function searchITCompanies(lat, lng) {
     companyList.innerHTML = '<li class="placeholder">Scanning for IT companies...</li>';
     
-    // Overpass Query
-    const query = `[out:json];node["office"="it"](around:3000,${lat},${lng});out;`;
+    // Overpass Query (Updated for India/General Search)
+    const query = `
+      [out:json][timeout:25];
+      (
+        node["office"="it"](around:3000,${lat},${lng});
+        way["office"="it"](around:3000,${lat},${lng});
+        relation["office"="it"](around:3000,${lat},${lng});
+        node["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lng});
+        way["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lng});
+        relation["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lng});
+      );
+      out center;
+    `;
     const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
 
     try {

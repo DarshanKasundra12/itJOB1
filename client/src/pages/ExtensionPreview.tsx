@@ -118,8 +118,19 @@ export default function ExtensionPreview() {
   };
 
   const searchCompanies = async (lat: number, lon: number) => {
-    // Overpass API
-    const overpassQuery = `[out:json];node["office"="it"](around:3000,${lat},${lon});out;`;
+    // Overpass API (Updated for India/General Search)
+    const overpassQuery = `
+      [out:json][timeout:25];
+      (
+        node["office"="it"](around:3000,${lat},${lon});
+        way["office"="it"](around:3000,${lat},${lon});
+        relation["office"="it"](around:3000,${lat},${lon});
+        node["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lon});
+        way["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lon});
+        relation["name"~"Technologies|Solutions|Infoway|Infotech|Software|Systems|Digital|Labs|Global|Services", i](around:3000,${lat},${lon});
+      );
+      out center;
+    `;
     const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(
       overpassQuery
     )}`;
